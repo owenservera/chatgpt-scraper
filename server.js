@@ -12,9 +12,7 @@ const scrapeScript = fs.readFileSync(path.join(__dirname, 'chatgpt.js'), 'utf8')
 
 app.post('/scrape', async (req, res) => {
   const { url } = req.body;
-  if (!url || !url.startsWith('https://chatgpt.com/share/')) {
-    return res.status(400).json({ error: 'Invalid or missing ChatGPT share URL' });
-  }
+
 
   try {
     const browser = await puppeteer.launch({
