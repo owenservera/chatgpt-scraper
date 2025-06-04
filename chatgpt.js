@@ -1,4 +1,15 @@
 // scrapers/chatgpt.js
+function generateConversationId() {
+  // Extract from URL or generate a unique ID
+  const url = window.location.href;
+  const urlMatch = url.match(/\/c\/([a-zA-Z0-9-]+)/);
+  if (urlMatch) {
+    return urlMatch[1];
+  }
+  
+  // Fallback: generate a unique ID
+  return 'conv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
 
 function convertLatex(content) {
     let processed = content.replace(/\\\\$$ (.*?)\\\\ $$/g, (_, eq) => `$${eq}$`);

@@ -2,7 +2,7 @@ services:
   - type: web
     name: chatgpt-scraper
     runtime: node
-    buildCommand: npm install
+    buildCommand: chmod +x render-build.sh && ./render-build.sh
     startCommand: npm start
     plan: free
     autoDeploy: true
@@ -10,4 +10,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-        value: "false"  # Let Puppeteer handle chromium download
+        value: "true"
+      - key: PUPPETEER_EXECUTABLE_PATH
+        value: /usr/bin/google-chrome-stable
