@@ -31,7 +31,22 @@ app.post('/scrape', async (req, res) => {
     });
 
     await browser.close();
-    res.json(result);
+    const { conversation_id, conversation_title, messages } = result;
+
+    const mongoReady = {
+      conversation_id,
+      conversation_title: conversation_title || null,
+      messages,
+      model: null,
+      images: [],
+      source_url: url,
+      createdAt: { $date: new Date().toISOString() },
+      updatedAt: { $date: new Date().toISOString() },
+      scraped_at: { $date: new Date().toISOString() }
+    };
+    
+    res.json(mongoReady);
+    
   } catch (err) {
     console.error('Scrape failed:', err);
     res.status(500).json({ error: 'Scrape failed' });
