@@ -64,7 +64,7 @@ app.post('/scrape', async (req, res) => {
   try {
     // Detect Chrome executable path
     const chromePath = process.env.PUPPETEER_EXECUTABLE_PATH || 
-                     
+                      '/usr/bin/google-chrome-stable' ||
                       '/usr/bin/chromium-browser' ||
                       undefined;
 
